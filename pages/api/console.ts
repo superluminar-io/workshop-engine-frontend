@@ -2,7 +2,14 @@ import { requireAuth, users } from '@clerk/nextjs/api'
 import { STS } from "@aws-sdk/client-sts";
 import fetch from 'node-fetch';
 
-const client = new STS({ region: 'eu-central-1' });
+const client = new STS({
+  region: 'eu-central-1',
+  credentials: {
+    accessKeyId: process.env.CONSOLE_AWS_ACCESS_KEY_ID,
+    secretAccessKey: process.env.CONSOLE_AWS_SECRET_ACCESS_KEY,
+  }
+});
+
 const consoleUrl = "https://eu-central-1.console.aws.amazon.com"
 const signinEndpoint = 'https://signin.aws.amazon.com/federation';
 
