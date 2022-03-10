@@ -1,0 +1,23 @@
+{
+  "name": "workshop-engine-frontend",
+  "description": "Portal for superluminar workshops",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start"
+  },
+  "dependencies": {
+    "@aws-sdk/client-sts": "^3.53.0",
+    "@clerk/nextjs": "^2.0.1",
+    "@types/react": "^17.0.40",
+    "next": "11.1.2",
+    "node-fetch": "^2.6.7",
+    "react": "17.0.2",
+    "react-dom": "17.0.2",
+    "typescript": "^4.6.2"
+  },
+  "devDependencies": {
+    "@types/node-fetch": "^2.6.1"
+  }
+}
