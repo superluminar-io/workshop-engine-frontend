@@ -1,40 +1,28 @@
-import { requireAuth, users } from '@clerk/nextjs/api'
-import { STS } from "@aws-sdk/client-sts";
+import type { NextApiRequest, NextApiResponse } from 'next'
 import fetch from 'node-fetch';
 
-const client = new STS({
-  region: 'eu-central-1',
-  credentials: {
-    accessKeyId: process.env.CONSOLE_AWS_ACCESS_KEY_ID,
-    secretAccessKey: process.env.CONSOLE_AWS_SECRET_ACCESS_KEY,
-  }
-});
+const workshopEngineApiEndpoint = 'https://2ucii2rhcjblfoyfk534fou2gi.appsync-api.eu-west-1.amazonaws.com/graphql';
 
-const consoleUrl = "https://eu-central-1.console.aws.amazon.com"
-const signinEndpoint = 'https://signin.aws.amazon.com/federation';
+export default async (req: NextApiRequest, res: NextApiResponse) => {
+  const sessionToken = req.cookies['__session'];
 
-// Based on: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_providers_enable-console-custom-url.html#STSConsoleLink_programRuby
-export default requireAuth(async (req, res) => {
-  const userId = req.session.userId;
-  const user = await users.getUser(userId);
-  const emailAddress = user.emailAddresses[0].emailAddress;
-  const awsAccountId = user.publicMetadata.aws_account_id;
-  
-  const assumedRole = await client.assumeRole({
-    RoleArn: `arn:aws:iam::${awsAccountId}:role/Clerk`,
-    RoleSessionName: emailAddress
+  const response = await fetch(workshopEngineApiEndpoint, {
+    method: 'POST',
+    headers: {
+      Authorization: `Bearer ${sessionToken}`,
+    },
+    body: JSON.stringify({
+      query: `
+        mutation CreateAwsSignUrl($awsAccountId: String!) {
+          createAwsSignInUrl(awsAccountId: $awsAccountId) 
+        }
+      `,
+      variables: {
+        awsAccountId: '770747224463'
+      }
+    })
   });
 
-  const session = JSON.stringify({
-    sessionId: assumedRole.Credentials.AccessKeyId,
-    sessionKey: assumedRole.Credentials.SecretAccessKey,
-    sessionToken: assumedRole.Credentials.SessionToken,
-  });
-
-  const url = `${signinEndpoint}?Action=getSigninToken&SessionType=json&Session=${encodeURIComponent(session)}`
-  const response = await fetch(url);
   const body = await response.json();
-  const loginUrl = `${signinEndpoint}?Action=login&SigninToken=${encodeURIComponent(body.SigninToken)}&Destination=${encodeURIComponent(consoleUrl)}`
-
-  res.redirect(307, loginUrl)
-})
+  res.redirect(307, body.data.createAwsSignInUrl)
+}
