@@ -1,6 +1,6 @@
 import Head from "next/head";
 import { SignIn, ClerkProvider, SignedIn, SignedOut } from "@clerk/nextjs";
-import { CssBaseline, ThemeProvider } from "@mui/material";
+import { Box, CssBaseline, ThemeProvider } from "@mui/material";
 import { theme } from "../config/theme";
 
 import "@fontsource/source-sans-pro";
@@ -25,7 +25,9 @@ const App = ({ Component, pageProps }) => (
           <Component {...pageProps} />
         </SignedIn>
         <SignedOut>
-          <SignIn />
+          <Box mt={12}>
+            <SignIn />
+          </Box>
         </SignedOut>
       </main>
     </ClerkProvider>
