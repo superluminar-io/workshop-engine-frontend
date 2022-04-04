@@ -1,41 +1,35 @@
-import '../styles/globals.css'
-import { ClerkProvider, SignedIn, SignedOut } from '@clerk/nextjs'
-import { useRouter } from 'next/router'
-import Layout from '../components/Layout'
-import Head from 'next/head'
-import Script from 'next/script'
-import { SignIn } from '@clerk/nextjs'
-import Header from '../components/Header'
+import Head from "next/head";
+import { SignIn, ClerkProvider, SignedIn, SignedOut } from "@clerk/nextjs";
+import { CssBaseline, ThemeProvider } from "@mui/material";
+import { theme } from "../config/theme";
 
-/**
- * List pages you want to be publicly accessible, or leave empty if
- * every page requires authentication. Use this naming strategy:
- *  "/"              for pages/index.js
- *  "/foo"           for pages/foo/index.js
- *  "/foo/bar"       for pages/foo/bar.js
- *  "/foo/[...bar]"  for pages/foo/[...bar].js
- */
-const publicPages = ['/sign-in/[[...index]]']
+import "@fontsource/source-sans-pro";
 
-const MyApp = ({ Component, pageProps }) => {
-  const router = useRouter()
-
-  /**
-   * If the current route is listed as public, render it directly.
-   * Otherwise, use Clerk to require authentication.
-   */
-  return (
+const App = ({ Component, pageProps }) => (
+  <ThemeProvider theme={theme}>
     <ClerkProvider>
-      <Layout>
+      <CssBaseline />
+      <Head>
+        <title>superluminar workshops</title>
+        <meta
+          name="viewport"
+          content="width=device-width, initial-scale=1.0"
+        ></meta>
+        <link
+          rel="stylesheet"
+          href="//fonts.googleapis.com/icon?family=Material+Icons"
+        />
+      </Head>
+      <main>
         <SignedIn>
           <Component {...pageProps} />
         </SignedIn>
         <SignedOut>
           <SignIn />
         </SignedOut>
-      </Layout>
+      </main>
     </ClerkProvider>
-  )
-}
+  </ThemeProvider>
+);
 
-export default MyApp
+export default App;

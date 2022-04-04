@@ -9,7 +9,12 @@
   },
   "dependencies": {
     "@aws-sdk/client-sts": "^3.53.0",
-    "@clerk/nextjs": "^2.0.1",
+    "@clerk/nextjs": "^3.3.0",
+    "@emotion/react": "^11.8.2",
+    "@emotion/styled": "^11.8.1",
+    "@fontsource/source-sans-pro": "^4.5.6",
+    "@mui/icons-material": "^5.5.1",
+    "@mui/material": "^5.5.3",
     "@types/react": "^17.0.40",
     "next": "11.1.2",
     "node-fetch": "^2.6.7",
