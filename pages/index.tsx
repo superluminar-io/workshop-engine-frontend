@@ -21,7 +21,7 @@ const Home = () => {
           </Typography>
         </CardContent>
         <CardActions>
-          <Button href="/api/console" target="_blank">
+          <Button href="/api/console?awsAccountId=770747224463" target="_blank">
             Open AWS Management Console
           </Button>
         </CardActions>

@@ -8,6 +8,7 @@ interface CreateAwsSignUrlResponse {
 }
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
+  const awsAccountId = req.query.awsAccountId;
   const workshopEngineApiEndpoint = process.env.NEXT_PUBLIC_APPSYNC_URL;
   const sessionToken = req.cookies['__session'];
 
@@ -23,7 +24,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
         }
       `,
       variables: {
-        awsAccountId: '770747224463'
+        awsAccountId
       }
     })
   });
