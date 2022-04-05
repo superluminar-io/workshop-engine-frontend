@@ -3,6 +3,12 @@ import fetch from 'node-fetch';
 
 const workshopEngineApiEndpoint = 'https://2ucii2rhcjblfoyfk534fou2gi.appsync-api.eu-west-1.amazonaws.com/graphql';
 
+interface CreateAwsSignUrlResponse { 
+  data: {
+    createAwsSignInUrl: string; 
+  }
+}
+
 export default async (req: NextApiRequest, res: NextApiResponse) => {
   const sessionToken = req.cookies['__session'];
 
@@ -23,6 +29,6 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     })
   });
 
-  const body = await response.json();
+  const body = await response.json() as CreateAwsSignUrlResponse;
   res.redirect(307, body.data.createAwsSignInUrl)
 }
