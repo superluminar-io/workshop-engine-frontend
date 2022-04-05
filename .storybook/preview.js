@@ -1,6 +1,6 @@
 import React from 'react';
 import { CssBaseline, ThemeProvider } from '@mui/material';
-import { theme } from '../config/theme'
+import { theme } from '../src/config/theme'
 import * as NextImage from "next/image";
 
 import "@fontsource/source-sans-pro";

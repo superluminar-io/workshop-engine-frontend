@@ -7,7 +7,7 @@ import {
   Typography,
 } from "@mui/material";
 import { useClerk } from "@clerk/nextjs";
-import { Layout } from "../components/Layout/Layout";
+import { Layout } from "../src/components/Layout/Layout";
 
 const Home = () => {
   const { signOut } = useClerk();
