@@ -6,26 +6,29 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "storybook": "start-storybook -p 6006 -s ./public",
-    "build-storybook": "build-storybook -s ./public"
+    "test": "jest --watch",
+    "test:ci": "jest",
+    "storybook": "start-storybook -p 6006",
+    "build-storybook": "build-storybook"
   },
   "dependencies": {
-    "@aws-sdk/client-sts": "^3.53.0",
+    "@aws-sdk/client-sts": "^3.58.0",
     "@clerk/nextjs": "^3.3.0",
     "@emotion/react": "^11.8.2",
     "@emotion/styled": "^11.8.1",
     "@fontsource/source-sans-pro": "^4.5.6",
     "@mui/icons-material": "^5.5.1",
     "@mui/material": "^5.5.3",
-    "@types/react": "^17.0.40",
-    "next": "11.1.2",
-    "node-fetch": "^2.6.7",
-    "react": "17.0.2",
-    "react-dom": "17.0.2",
-    "typescript": "^4.6.2"
+    "@types/react": "^17.0.43",
+    "next": "12.1.4",
+    "node-fetch": "^3.2.3",
+    "react": "18.0.0",
+    "react-dom": "18.0.0",
+    "typescript": "^4.6.3"
   },
   "devDependencies": {
     "@babel/core": "^7.17.8",
+    "@emotion/jest": "^11.8.0",
     "@storybook/addon-actions": "^6.4.20",
     "@storybook/addon-essentials": "^6.4.20",
     "@storybook/addon-interactions": "^6.4.20",
@@ -34,8 +37,11 @@
     "@storybook/manager-webpack5": "^6.4.20",
     "@storybook/react": "^6.4.20",
     "@storybook/testing-library": "^0.0.9",
+    "@testing-library/jest-dom": "^5.16.3",
+    "@testing-library/react": "^13.0.0",
     "@types/node-fetch": "^2.6.1",
     "babel-loader": "^8.2.4",
+    "jest": "^27.5.1",
     "webpack": "^5.71.0"
   }
 }
