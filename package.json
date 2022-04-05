@@ -4,14 +4,17 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
+    "prebuild": "npm run graphql",
     "build": "next build",
     "start": "next start",
     "test": "jest --watch",
     "test:ci": "jest",
     "storybook": "start-storybook -p 6006",
-    "build-storybook": "build-storybook"
+    "build-storybook": "build-storybook",
+    "graphql": "graphql-codegen --config codegen.yml -r dotenv/config"
   },
   "dependencies": {
+    "@apollo/client": "^3.5.10",
     "@aws-sdk/client-sts": "^3.58.0",
     "@clerk/nextjs": "^3.3.0",
     "@emotion/react": "^11.8.2",
@@ -29,6 +32,11 @@
   "devDependencies": {
     "@babel/core": "^7.17.8",
     "@emotion/jest": "^11.8.0",
+    "@graphql-codegen/cli": "2.6.2",
+    "@graphql-codegen/near-operation-file-preset": "^2.2.9",
+    "@graphql-codegen/typescript": "2.4.8",
+    "@graphql-codegen/typescript-operations": "2.3.5",
+    "@graphql-codegen/typescript-react-apollo": "3.2.11",
     "@storybook/addon-actions": "^6.4.20",
     "@storybook/addon-essentials": "^6.4.20",
     "@storybook/addon-interactions": "^6.4.20",
@@ -41,6 +49,8 @@
     "@testing-library/react": "^13.0.0",
     "@types/node-fetch": "^2.6.1",
     "babel-loader": "^8.2.4",
+    "dotenv": "^16.0.0",
+    "graphql": "^16.3.0",
     "jest": "^27.5.1",
     "webpack": "^5.71.0"
   }

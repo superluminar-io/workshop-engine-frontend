@@ -1,0 +1,17 @@
+overwrite: true
+schema: 
+  - ${NEXT_PUBLIC_APPSYNC_URL}:
+      headers:
+        x-api-key: ${NEXT_PUBLIC_APPSYNC_API_KEY}
+documents: "**/*.graphql"
+generates:
+  src/types.ts:
+    - typescript
+  src/:
+    preset: near-operation-file
+    presetConfig:
+      extension: .generated.tsx
+      baseTypesPath: types.ts
+    plugins:
+      - typescript-operations
+      - typescript-react-apollo

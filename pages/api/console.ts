@@ -1,8 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 import fetch from 'node-fetch';
 
-const workshopEngineApiEndpoint = 'https://2ucii2rhcjblfoyfk534fou2gi.appsync-api.eu-west-1.amazonaws.com/graphql';
-
 interface CreateAwsSignUrlResponse { 
   data: {
     createAwsSignInUrl: string; 
@@ -10,6 +8,7 @@ interface CreateAwsSignUrlResponse {
 }
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
+  const workshopEngineApiEndpoint = process.env.NEXT_PUBLIC_APPSYNC_URL;
   const sessionToken = req.cookies['__session'];
 
   const response = await fetch(workshopEngineApiEndpoint, {

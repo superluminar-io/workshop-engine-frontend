@@ -1,7 +1,9 @@
 import Head from "next/head";
 import { SignIn, ClerkProvider, SignedIn, SignedOut } from "@clerk/nextjs";
 import { Box, CssBaseline, ThemeProvider } from "@mui/material";
-import { theme } from "../config/theme";
+import { theme } from "../src/config/theme";
+import { UserContextContainer } from "../src/containers/UserContextContainer/UserContextContainer";
+import { ApolloProviderContainer } from "../src/containers/ApolloProviderContainer/ApolloProviderContainer";
 
 import "@fontsource/source-sans-pro";
 
@@ -22,7 +24,11 @@ const App = ({ Component, pageProps }) => (
       </Head>
       <main>
         <SignedIn>
-          <Component {...pageProps} />
+          <ApolloProviderContainer>
+            <UserContextContainer>
+              <Component {...pageProps} />
+            </UserContextContainer>
+          </ApolloProviderContainer>
         </SignedIn>
         <SignedOut>
           <Box mt={12}>
