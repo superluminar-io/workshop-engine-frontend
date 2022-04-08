@@ -1,31 +1,17 @@
 import React from "react";
-import {
-  Button,
-  Card,
-  CardContent,
-  CardActions,
-  Typography,
-} from "@mui/material";
 import { useClerk } from "@clerk/nextjs";
 import { Layout } from "../src/components/Layout/Layout";
+import { WorkshopCard } from "../src/components/WorkshopCard/WorkshopCard";
 
 const Home = () => {
   const { signOut } = useClerk();
 
   return (
     <Layout title="Welcome 👋" signOut={() => signOut()}>
-      <Card>
-        <CardContent>
-          <Typography variant="h5" component="span">
-            Serverless Beginner Workshop
-          </Typography>
-        </CardContent>
-        <CardActions>
-          <Button href="/api/console?awsAccountId=770747224463" target="_blank">
-            Open AWS Management Console
-          </Button>
-        </CardActions>
-      </Card>
+      <WorkshopCard
+        title="Serverless Beginner Workshop"
+        awsAccountId="770747224463"
+      />
     </Layout>
   );
 };
