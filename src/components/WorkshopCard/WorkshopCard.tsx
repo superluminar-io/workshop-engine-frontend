@@ -5,31 +5,49 @@ import {
   CardContent,
   CardActions,
   Typography,
+  Skeleton,
 } from "@mui/material";
+import * as translations from "./WorkshopCard.translations";
 
-export interface WorkshopCardProps {
+export interface WorkshopCardDataProps {
+  variant?: "data";
   title: string;
   awsAccountId: string;
 }
 
-export const WorkshopCard: React.FunctionComponent<WorkshopCardProps> = ({
-  title,
-  awsAccountId,
-}) => {
+export interface WorkshopCardLoadingProps {
+  variant: "loading";
+}
+
+export type WorkshopCardProps =
+  | WorkshopCardDataProps
+  | WorkshopCardLoadingProps;
+
+export const WorkshopCard: React.FunctionComponent<WorkshopCardProps> = (
+  props
+) => {
+  const isLoading = props.variant === "loading";
+
   return (
     <Card sx={{ mb: 4 }}>
       <CardContent>
         <Typography variant="h5" component="span">
-          {title}
+          {isLoading ? <Skeleton variant="text" /> : props.title}
         </Typography>
       </CardContent>
       <CardActions>
-        <Button
-          href={`/api/console?awsAccountId=${awsAccountId}`}
-          target="_blank"
-        >
-          Open AWS Management Console
-        </Button>
+        {isLoading ? (
+          <Skeleton variant="rectangular">
+            <Button href="">{translations.buttonLabel}</Button>
+          </Skeleton>
+        ) : (
+          <Button
+            href={`/api/console?awsAccountId=${props.awsAccountId}`}
+            target="_blank"
+          >
+            {translations.buttonLabel}
+          </Button>
+        )}
       </CardActions>
     </Card>
   );

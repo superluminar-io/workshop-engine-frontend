@@ -5,14 +5,6 @@ import { WorkshopCard } from "./WorkshopCard";
 export default {
   title: "WorkshopCard",
   component: WorkshopCard,
-  parameters: {
-    WorkshopCard: "fullscreen",
-  },
-  argTypes: {
-    signOut: {
-      action: "signed out",
-    },
-  },
 } as ComponentMeta<typeof WorkshopCard>;
 
 const TemplateSingle: ComponentStory<typeof WorkshopCard> = (args) => (
@@ -32,6 +24,12 @@ Single.storyName = "single item";
 Single.args = {
   title: "Serverless Beginner Workshop",
   awsAccountId: "12345678",
+};
+
+export const Loading = TemplateSingle.bind({});
+Loading.storyName = "loading";
+Loading.args = {
+  variant: "loading",
 };
 
 export const List = TemplateList.bind({});

@@ -1,0 +1,10 @@
+query WorkshopList($nextToken: String) {
+  workshops(nextToken: $nextToken) {
+    items {
+      id
+      title
+      awsAccountId
+    }
+    nextToken
+  }
+}
