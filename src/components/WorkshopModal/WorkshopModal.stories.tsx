@@ -34,3 +34,12 @@ Main.args = {
   title: "Create new workshop",
   submitButtonLabel: "Create",
 };
+
+export const Loading = Template.bind({});
+Loading.storyName = "loading";
+Loading.args = {
+  open: true,
+  loading: true,
+  title: "Create new workshop",
+  submitButtonLabel: "Create",
+};

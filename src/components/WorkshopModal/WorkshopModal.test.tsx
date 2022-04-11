@@ -9,9 +9,10 @@ const submitButtonLabel = "Create";
 
 const TestComponent: React.FunctionComponent<{
   open: boolean;
+  loading: boolean;
   onSubmit?(): void;
   onCancel?(): void;
-}> = ({ open, onSubmit, onCancel }) => {
+}> = ({ open, loading, onSubmit, onCancel }) => {
   const methods = useForm<WorkshopFormData>();
   return (
     <WorkshopModal
@@ -19,22 +20,30 @@ const TestComponent: React.FunctionComponent<{
       submitButtonLabel={submitButtonLabel}
       control={methods.control}
       open={open}
+      loading={loading}
       onSubmit={onSubmit || noop}
       onCancel={onCancel || noop}
     />
   );
 };
 
-describe("modal opened", () => {
+describe("modal open", () => {
   it("renders the modal", () => {
-    render(<TestComponent open={true} />);
+    render(<TestComponent open={true} loading={false} />);
     expect(document.body).toMatchSnapshot();
   });
 });
 
-describe("modal closed", () => {
+describe("modal close", () => {
   it("renders the modal", () => {
-    render(<TestComponent open={false} />);
+    render(<TestComponent open={false} loading={false} />);
+    expect(document.body).toMatchSnapshot();
+  });
+});
+
+describe("loading", () => {
+  it("renders the modal", () => {
+    render(<TestComponent open={false} loading={true} />);
     expect(document.body).toMatchSnapshot();
   });
 });
@@ -42,7 +51,9 @@ describe("modal closed", () => {
 describe("click on submit button", () => {
   it("triggers the submit handler", async () => {
     const submitHandler = jest.fn();
-    render(<TestComponent open={true} onSubmit={submitHandler} />);
+    render(
+      <TestComponent open={true} loading={false} onSubmit={submitHandler} />
+    );
 
     // Set workshop title for a valid form submission
     fireEvent.change(
@@ -61,7 +72,9 @@ describe("click on submit button", () => {
 describe("click on cancel button", () => {
   it("triggers the canel handler", async () => {
     const cancelHandler = jest.fn();
-    render(<TestComponent open={true} onCancel={cancelHandler} />);
+    render(
+      <TestComponent open={true} loading={false} onCancel={cancelHandler} />
+    );
 
     fireEvent.click(screen.getByText(translations.cancelButtonLabel));
 

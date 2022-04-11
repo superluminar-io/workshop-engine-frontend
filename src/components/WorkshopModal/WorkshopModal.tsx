@@ -8,6 +8,7 @@ import {
   useMediaQuery,
   useTheme,
 } from "@mui/material";
+import LoadingButton from "@mui/lab/LoadingButton";
 import { Control } from "react-hook-form";
 import { ControlledTextField } from "../ControlledTextField/ControlledTextField";
 import * as translations from "./WorkshopModal.translations";
@@ -23,6 +24,7 @@ export interface WorkshopModalProps {
   title: string;
   submitButtonLabel: string;
   open: boolean;
+  loading: boolean;
   control: Control<WorkshopFormData>;
   onCancel(): void;
   onSubmit: FormEventHandler<HTMLFormElement>;
@@ -32,6 +34,7 @@ export const WorkshopModal: React.FunctionComponent<WorkshopModalProps> = ({
   title,
   submitButtonLabel,
   open,
+  loading,
   onCancel,
   control,
   onSubmit,
@@ -47,7 +50,7 @@ export const WorkshopModal: React.FunctionComponent<WorkshopModalProps> = ({
   return (
     <Dialog
       open={open}
-      onClose={onCancel}
+      onClose={loading ? undefined : onCancel}
       fullWidth
       maxWidth="sm"
       fullScreen={fullScreen}
@@ -68,6 +71,7 @@ export const WorkshopModal: React.FunctionComponent<WorkshopModalProps> = ({
             fullWidth
             required={true}
             placeholder={translations.inputTitlePlaceholder}
+            disabled={loading}
           />
           <ControlledTextField
             control={control}
@@ -78,6 +82,7 @@ export const WorkshopModal: React.FunctionComponent<WorkshopModalProps> = ({
             placeholder={translations.inputAwsAccountIdPlaceholder}
             inputProps={{ pattern: `\d{12}` }}
             fullWidth
+            disabled={loading}
           />
           <ControlledTextField
             control={control}
@@ -88,15 +93,26 @@ export const WorkshopModal: React.FunctionComponent<WorkshopModalProps> = ({
             fullWidth
             placeholder={translations.inputAttendeesPlaceholder}
             inputProps={{ multiple: true }}
+            disabled={loading}
           />
         </DialogContent>
         <DialogActions sx={{ pr: 3, pl: 3, pb: 2 }}>
-          <Button variant="outlined" onClick={onCancel} fullWidth={fullScreen}>
+          <Button
+            variant="outlined"
+            onClick={onCancel}
+            fullWidth={fullScreen}
+            disabled={loading}
+          >
             {translations.cancelButtonLabel}
           </Button>
-          <Button variant="contained" type="submit" fullWidth={fullScreen}>
+          <LoadingButton
+            variant="contained"
+            type="submit"
+            fullWidth={fullScreen}
+            loading={loading}
+          >
             {submitButtonLabel}
-          </Button>
+          </LoadingButton>
         </DialogActions>
       </form>
     </Dialog>
