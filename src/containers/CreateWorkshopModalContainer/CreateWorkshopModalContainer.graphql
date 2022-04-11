@@ -1,0 +1,5 @@
+mutation CreateWorkshop($input: CreateOrUpdateWorkshopInput!) {
+  createWorkshop(input: $input) {
+    id
+  }
+}

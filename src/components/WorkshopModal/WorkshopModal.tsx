@@ -17,7 +17,7 @@ export interface WorkshopFormData {
   title: string;
   awsAccountId?: string;
   // comma separated
-  attendees: string;
+  attendees?: string;
 }
 
 export interface WorkshopModalProps {
@@ -80,7 +80,7 @@ export const WorkshopModal: React.FunctionComponent<WorkshopModalProps> = ({
             name="awsAccountId"
             label={translations.inputAwsAccountIdLabel}
             placeholder={translations.inputAwsAccountIdPlaceholder}
-            inputProps={{ pattern: `\d{12}` }}
+            inputProps={{ pattern: "[0-9]{12}" }}
             fullWidth
             disabled={loading}
           />
