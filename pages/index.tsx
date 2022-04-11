@@ -2,8 +2,8 @@ import React from "react";
 import { useClerk } from "@clerk/nextjs";
 import { Layout } from "../src/components/Layout/Layout";
 import { WorkshopListContainer } from "../src/containers/WorkshopListContainer/WorkshopListContainer";
-import { Button } from "@mui/material";
-import AddIcon from "@mui/icons-material/Add";
+import { CreateWorkshopModalContainer } from "../src/containers/CreateWorkshopModalContainer/CreateWorkshopModalContainer";
+import { WorkshopListDocument } from "../src/containers/WorkshopListContainer/WorkshopListContainer.generated";
 
 const Home = () => {
   const { signOut } = useClerk();
@@ -12,14 +12,7 @@ const Home = () => {
     <Layout
       title="Welcome 👋"
       titleRightSide={
-        <Button
-          size="small"
-          variant="contained"
-          color="primary"
-          startIcon={<AddIcon />}
-        >
-          Create workshop
-        </Button>
+        <CreateWorkshopModalContainer refetchQueries={[WorkshopListDocument]} />
       }
       signOut={() => signOut()}
     >
