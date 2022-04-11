@@ -7,6 +7,8 @@ import {
 import { ThemeProvider } from "@mui/material";
 import { theme } from "../config/theme";
 
+export const noop = () => null;
+
 export const render = (
   ui: React.ReactElement,
   options?: Omit<RenderOptions, "queries">
