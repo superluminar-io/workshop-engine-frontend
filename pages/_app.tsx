@@ -9,7 +9,7 @@ import "@fontsource/source-sans-pro";
 
 const App = ({ Component, pageProps }) => (
   <ThemeProvider theme={theme}>
-    <ClerkProvider>
+    <ClerkProvider {...pageProps}>
       <CssBaseline />
       <Head>
         <title>superluminar workshops</title>
