@@ -10,7 +10,7 @@ const Home = () => {
 
   return (
     <Layout
-      title="Welcome 👋"
+      title="Workshops"
       titleRightSide={
         <CreateWorkshopModalContainer refetchQueries={[WorkshopListDocument]} />
       }

@@ -1,4 +1,4 @@
-export const buttonCreateWorkshop = "Create workshop";
+export const buttonCreateWorkshop = "New";
 
 export const modalTitle = "Create new workshop";
 export const modalSubmitButtonLabel = "Create";
