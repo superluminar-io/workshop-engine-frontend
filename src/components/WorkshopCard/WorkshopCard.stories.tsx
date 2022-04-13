@@ -26,6 +26,12 @@ Single.args = {
   awsAccountId: "12345678",
 };
 
+export const WithoutAwsAccountId = TemplateSingle.bind({});
+WithoutAwsAccountId.storyName = "single item w/o AWS Account ID";
+WithoutAwsAccountId.args = {
+  title: "Serverless Beginner Workshop",
+};
+
 export const Loading = TemplateSingle.bind({});
 Loading.storyName = "loading";
 Loading.args = {

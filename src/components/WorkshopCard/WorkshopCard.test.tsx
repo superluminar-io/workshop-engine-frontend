@@ -14,3 +14,10 @@ describe("loading", () => {
     expect(container).toMatchSnapshot();
   });
 });
+
+describe("w/o AWS Account ID", () => {
+  it("renders w/o aws management console button", () => {
+    const { container } = render(<WorkshopCard title="Title" />);
+    expect(container).toMatchSnapshot();
+  });
+});

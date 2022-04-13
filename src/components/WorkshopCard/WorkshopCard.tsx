@@ -12,7 +12,7 @@ import * as translations from "./WorkshopCard.translations";
 export interface WorkshopCardDataProps {
   variant?: "data";
   title: string;
-  awsAccountId: string;
+  awsAccountId?: string;
 }
 
 export interface WorkshopCardLoadingProps {
@@ -35,12 +35,14 @@ export const WorkshopCard: React.FunctionComponent<WorkshopCardProps> = (
           {isLoading ? <Skeleton variant="text" /> : props.title}
         </Typography>
       </CardContent>
+
       <CardActions>
-        {isLoading ? (
+        {isLoading && (
           <Skeleton variant="rectangular">
             <Button href="">{translations.buttonLabel}</Button>
           </Skeleton>
-        ) : (
+        )}
+        {!isLoading && props.awsAccountId && (
           <Button
             href={`/api/console?awsAccountId=${props.awsAccountId}`}
             target="_blank"
