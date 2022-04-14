@@ -5,7 +5,6 @@ import { UserRole } from "../../types";
 import { UpdateWorkshopModalContainer } from "../UpdateWorkshopModalContainer/UpdateWorkshopModalContainer";
 import { MenuItem } from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
-import { RefetchQueryDescriptor } from "@apollo/client";
 import * as translations from "./WorkshopMenuContainer.translations";
 
 export interface WorkshopMenuContainerProps {
@@ -13,11 +12,10 @@ export interface WorkshopMenuContainerProps {
   title: string;
   awsAccountId?: string;
   attendees: string[];
-  refetchQueries?: RefetchQueryDescriptor[];
 }
 
 export const WorkshopMenuContainer: React.FunctionComponent<WorkshopMenuContainerProps> =
-  ({ title, awsAccountId, attendees, workshopId, refetchQueries }) => {
+  ({ title, awsAccountId, attendees, workshopId }) => {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const { role } = useContext(UserContext);
 
@@ -33,15 +31,15 @@ export const WorkshopMenuContainer: React.FunctionComponent<WorkshopMenuContaine
             {translations.menuItemEdit}
           </MenuItem>
         </WorkshopMenu>
-        <UpdateWorkshopModalContainer
-          open={isModalOpen}
-          onClose={() => setIsModalOpen(false)}
-          workshopId={workshopId}
-          title={title}
-          awsAccountId={awsAccountId}
-          attendees={attendees}
-          refetchQueries={refetchQueries}
-        />
+        {isModalOpen && (
+          <UpdateWorkshopModalContainer
+            onClose={() => setIsModalOpen(false)}
+            workshopId={workshopId}
+            title={title}
+            awsAccountId={awsAccountId}
+            attendees={attendees}
+          />
+        )}
       </>
     );
   };

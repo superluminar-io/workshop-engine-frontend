@@ -6,28 +6,17 @@ import {
 } from "../../components/WorkshopModal/WorkshopModal";
 import { useForm } from "react-hook-form";
 import * as translations from "./UpdateWorkshopModalContainer.translations";
-import { RefetchQueryDescriptor } from "@apollo/client";
 
 export interface UpdateWorkshopModalContainerProps {
-  open: boolean;
   onClose(): void;
   workshopId: string;
   title: string;
   awsAccountId?: string;
   attendees: string[];
-  refetchQueries?: RefetchQueryDescriptor[];
 }
 
 export const UpdateWorkshopModalContainer: React.FunctionComponent<UpdateWorkshopModalContainerProps> =
-  ({
-    title,
-    awsAccountId,
-    attendees,
-    workshopId,
-    refetchQueries,
-    open,
-    onClose,
-  }) => {
+  ({ title, awsAccountId, attendees, workshopId, onClose }) => {
     const formMethods = useForm<WorkshopFormData>({
       defaultValues: {
         title,
@@ -39,7 +28,6 @@ export const UpdateWorkshopModalContainer: React.FunctionComponent<UpdateWorksho
 
     const handleCancel = () => {
       onClose();
-      formMethods.reset();
     };
 
     const handleSubmit = async (data: WorkshopFormData) => {
@@ -54,18 +42,14 @@ export const UpdateWorkshopModalContainer: React.FunctionComponent<UpdateWorksho
             attendees: attendees.split(","),
           },
         },
-        refetchQueries,
-        awaitRefetchQueries: true,
       });
 
       onClose();
-      formMethods.reset();
-      mutationOptions.reset();
     };
 
     return (
       <WorkshopModal
-        open={open}
+        open={true}
         loading={mutationOptions.loading}
         control={formMethods.control}
         title={translations.modalTitle}
