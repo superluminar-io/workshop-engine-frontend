@@ -42,6 +42,17 @@ exports[`loading renders skeleton 1`] = `
 
 .emotion-1 {
   padding: 16px;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  justify-content: space-between;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
 }
 
 .emotion-1:last-child {
@@ -197,6 +208,7 @@ exports[`loading renders skeleton 1`] = `
       >
         <span
           class="MuiSkeleton-root MuiSkeleton-text MuiSkeleton-pulse emotion-3"
+          style="width: 100px;"
         />
       </span>
     </div>
@@ -234,6 +246,18 @@ exports[`renders the workshop card 1`] = `
 
 .emotion-1 {
   padding: 16px;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  justify-content: space-between;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  min-height: 72px;
 }
 
 .emotion-1:last-child {
@@ -385,6 +409,18 @@ exports[`w/o AWS Account ID renders w/o aws management console button 1`] = `
 
 .emotion-1 {
   padding: 16px;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  justify-content: space-between;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  min-height: 72px;
 }
 
 .emotion-1:last-child {

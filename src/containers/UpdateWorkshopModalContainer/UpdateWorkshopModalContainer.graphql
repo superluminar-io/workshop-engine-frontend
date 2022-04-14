@@ -1,0 +1,8 @@
+mutation UpdateWorkshop(
+  $workshopId: ID!
+  $input: CreateOrUpdateWorkshopInput!
+) {
+  updateWorkshop(workshopId: $workshopId, input: $input) {
+    id
+  }
+}

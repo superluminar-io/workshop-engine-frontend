@@ -24,6 +24,7 @@
     "@mui/lab": "^5.0.0-alpha.77",
     "@mui/material": "^5.5.3",
     "@types/react": "^17.0.43",
+    "material-ui-popup-state": "^2.0.0",
     "next": "12.1.4",
     "nextjs-redirect": "^6.0.0",
     "node-fetch": "^3.2.3",

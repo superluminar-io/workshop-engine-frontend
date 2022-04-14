@@ -4,6 +4,7 @@ query WorkshopList($nextToken: String) {
       id
       title
       awsAccountId
+      attendees
     }
     nextToken
   }

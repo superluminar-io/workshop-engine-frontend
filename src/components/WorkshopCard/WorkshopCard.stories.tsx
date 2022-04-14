@@ -1,6 +1,9 @@
 import React from "react";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 import { WorkshopCard } from "./WorkshopCard";
+import { WorkshopMenu } from "../WorkshopMenu/WorkshopMenu";
+import EditIcon from "@mui/icons-material/Edit";
+import { MenuItem } from "@mui/material";
 
 export default {
   title: "WorkshopCard",
@@ -24,6 +27,21 @@ Single.storyName = "single item";
 Single.args = {
   title: "Serverless Beginner Workshop",
   awsAccountId: "12345678",
+};
+
+export const WithMenu = TemplateSingle.bind({});
+WithMenu.storyName = "w/ menu";
+WithMenu.args = {
+  title: "Serverless Beginner Workshop",
+  awsAccountId: "12345678",
+  headerRightSide: (
+    <WorkshopMenu id="abc">
+      <MenuItem>
+        <EditIcon />
+        Edit
+      </MenuItem>
+    </WorkshopMenu>
+  ),
 };
 
 export const WithoutAwsAccountId = TemplateSingle.bind({});

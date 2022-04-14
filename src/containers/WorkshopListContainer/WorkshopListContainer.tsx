@@ -1,9 +1,15 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Typography } from "@mui/material";
 import { WorkshopCard } from "../../components/WorkshopCard/WorkshopCard";
-import { useWorkshopListQuery } from "./WorkshopListContainer.generated";
+import {
+  useWorkshopListQuery,
+  WorkshopListDocument,
+} from "./WorkshopListContainer.generated";
+import { UserContext } from "../../contexts/UserContext/UserContext";
+import { WorkshopMenuContainer } from "../WorkshopMenuContainer/WorkshopMenuContainer";
 
 export const WorkshopListContainer: React.FunctionComponent = () => {
+  const { role } = useContext(UserContext);
   const { loading, error, data } = useWorkshopListQuery();
 
   if (loading) {
@@ -22,6 +28,15 @@ export const WorkshopListContainer: React.FunctionComponent = () => {
           key={workshop.id}
           title={workshop.title}
           awsAccountId={workshop.awsAccountId}
+          headerRightSide={
+            <WorkshopMenuContainer
+              workshopId={workshop.id}
+              title={workshop.title}
+              awsAccountId={workshop.awsAccountId}
+              attendees={workshop.attendees}
+              refetchQueries={[WorkshopListDocument]}
+            />
+          }
         />
       ))}
     </>
