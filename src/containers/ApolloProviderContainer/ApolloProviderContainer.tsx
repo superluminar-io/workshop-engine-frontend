@@ -7,9 +7,31 @@ import { useMemo } from "react";
 export const ApolloProviderContainer: React.FunctionComponent = ({
   children,
 }) => {
-  const {
-    session: { getToken },
-  } = useSession();
+  const client = useMemo(() => {
+    const httpLink = createHttpLink({
+      uri: process.env.NEXT_PUBLIC_APPSYNC_URL,
+    });
+
+    const authLink = setContext(async (_, { headers }) => ({
+      headers: {
+        ...headers,
+        authorization: 'public',
+      },
+    }));
+
+    return new ApolloClient({
+      link: authLink.concat(httpLink),
+      cache: new InMemoryCache(),
+    });
+  }, []);
+
+  return <ApolloProvider client={client}>{children}</ApolloProvider>;
+};
+
+export const ApolloProviderWithSessionContainer: React.FunctionComponent = ({
+  children,
+}) => {
+  const { session } = useSession();
 
   const client = useMemo(() => {
     const httpLink = createHttpLink({
@@ -19,7 +41,7 @@ export const ApolloProviderContainer: React.FunctionComponent = ({
     const authLink = setContext(async (_, { headers }) => ({
       headers: {
         ...headers,
-        authorization: `Bearer ${await getToken()}`,
+        authorization: `Bearer ${await session.getToken()}`,
       },
     }));
 
