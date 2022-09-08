@@ -7,6 +7,7 @@ import {
   Typography,
   Skeleton,
   CardHeader,
+  Link,
 } from "@mui/material";
 import MuiMarkdown from "mui-markdown";
 import * as translations from "./WorkshopCard.translations";
@@ -26,6 +27,18 @@ export interface WorkshopCardLoadingProps {
 export type WorkshopCardProps =
   | WorkshopCardDataProps
   | WorkshopCardLoadingProps;
+
+const MarkdownParagraph = (props) => (
+  <Typography
+    {...props}
+    variant="body1"
+    sx={{ mb: 2, "&:last-child": { mb: 0 } }}
+  />
+);
+
+const MarkdownLink = (props) => (
+  <Link {...props} target="_blank" rel="noreferrer noopener" />
+);
 
 export const WorkshopCard: React.FunctionComponent<WorkshopCardProps> = (
   props
@@ -60,11 +73,11 @@ export const WorkshopCard: React.FunctionComponent<WorkshopCardProps> = (
         <CardContent>
           <MuiMarkdown
             overrides={{
+              p: {
+                component: MarkdownParagraph,
+              },
               a: {
-                props: {
-                  target: "_blank",
-                  rel: "noreferrer noopener",
-                },
+                component: MarkdownLink,
               },
             }}
           >
