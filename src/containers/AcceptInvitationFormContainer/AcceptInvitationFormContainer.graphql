@@ -1,0 +1,5 @@
+mutation AcceptInvitation($inviteId: ID!, $emailAddress: String!) {
+  acceptInvitation(inviteId: $inviteId, emailAddress: $emailAddress) {
+    ok
+  }
+}

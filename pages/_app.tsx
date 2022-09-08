@@ -5,12 +5,16 @@ import { ClerkProvider, SignedIn, SignedOut } from "@clerk/nextjs";
 import { CssBaseline, ThemeProvider } from "@mui/material";
 import { theme } from "../src/config/theme";
 import { UserContextContainer } from "../src/containers/UserContextContainer/UserContextContainer";
-import { ApolloProviderContainer } from "../src/containers/ApolloProviderContainer/ApolloProviderContainer";
+import { ApolloProviderContainer, ApolloProviderWithSessionContainer } from "../src/containers/ApolloProviderContainer/ApolloProviderContainer";
 
 import "@fontsource/source-sans-pro";
 
 const Redirect = redirect("/sign-in");
-const publicPages = ["/sign-in/[[...index]]", "/sign-up/[[...index]]"];
+const publicPages = [
+  "/sign-in/[[...index]]",
+  "/sign-up/[[...index]]",
+  "/invite",
+];
 
 const App = ({ Component, pageProps }) => {
   const router = useRouter();
@@ -32,15 +36,17 @@ const App = ({ Component, pageProps }) => {
         </Head>
         <main>
           {publicPages.includes(router.pathname) ? (
-            <Component {...pageProps} />
+            <ApolloProviderContainer>
+              <Component {...pageProps} />
+            </ApolloProviderContainer>
           ) : (
             <>
               <SignedIn>
-                <ApolloProviderContainer>
+                <ApolloProviderWithSessionContainer>
                   <UserContextContainer>
                     <Component {...pageProps} />
                   </UserContextContainer>
-                </ApolloProviderContainer>
+                </ApolloProviderWithSessionContainer>
               </SignedIn>
               <SignedOut>
                 <Redirect>
