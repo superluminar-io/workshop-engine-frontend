@@ -1,6 +1,7 @@
 import React from "react";
 import { Button, Box, AppBar, Toolbar } from "@mui/material";
 import Image from "next/image";
+import * as translations from "./Header.translations";
 
 export interface HeaderProps {
   signOut?(): void;
@@ -20,7 +21,7 @@ export const Header: React.FunctionComponent<HeaderProps> = ({ signOut }) => (
       </Box>
       {signOut && (
         <Button onClick={() => signOut()} color="inherit">
-          Logout
+          {translations.buttonSignOutLabel}
         </Button>
       )}
     </Toolbar>

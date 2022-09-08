@@ -39,10 +39,3 @@ Loading.args = {
   loading: true,
   submitButtonLabel: "Join",
 };
-
-export const Success = Template.bind({});
-Success.storyName = "success";
-Success.args = {
-  success: true,
-  submitButtonLabel: "Join",
-};
