@@ -15,6 +15,7 @@ import * as translations from "./WorkshopModal.translations";
 
 export interface WorkshopFormData {
   title: string;
+  description: string;
   awsAccountId?: string;
   // comma separated
   attendees?: string;
@@ -72,6 +73,17 @@ export const WorkshopModal: React.FunctionComponent<WorkshopModalProps> = ({
             required={true}
             placeholder={translations.inputTitlePlaceholder}
             disabled={loading}
+          />
+          <ControlledTextField
+            control={control}
+            type="text"
+            name="description"
+            margin="dense"
+            label={translations.inputDescriptionLabel}
+            fullWidth
+            disabled={loading}
+            multiline={true}
+            minRows={5}
           />
           <ControlledTextField
             control={control}

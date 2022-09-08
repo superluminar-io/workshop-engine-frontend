@@ -11,15 +11,17 @@ export interface UpdateWorkshopModalContainerProps {
   onClose(): void;
   workshopId: string;
   title: string;
+  description?: string;
   awsAccountId?: string;
   attendees: string[];
 }
 
 export const UpdateWorkshopModalContainer: React.FunctionComponent<UpdateWorkshopModalContainerProps> =
-  ({ title, awsAccountId, attendees, workshopId, onClose }) => {
+  ({ title, description, awsAccountId, attendees, workshopId, onClose }) => {
     const formMethods = useForm<WorkshopFormData>({
       defaultValues: {
         title,
+        description,
         awsAccountId,
         attendees: attendees.join(","),
       },
@@ -38,6 +40,7 @@ export const UpdateWorkshopModalContainer: React.FunctionComponent<UpdateWorksho
           workshopId,
           input: {
             title: data.title,
+            description: data.description,
             awsAccountId: data.awsAccountId,
             attendees: attendees.split(","),
           },
