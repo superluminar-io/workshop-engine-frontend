@@ -5,6 +5,7 @@ mutation UpdateWorkshop(
   updateWorkshop(workshopId: $workshopId, input: $input) {
     id
     title
+    description
     awsAccountId
     attendees
   }

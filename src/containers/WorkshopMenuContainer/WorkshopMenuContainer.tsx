@@ -10,12 +10,13 @@ import * as translations from "./WorkshopMenuContainer.translations";
 export interface WorkshopMenuContainerProps {
   workshopId: string;
   title: string;
+  description?: string;
   awsAccountId?: string;
   attendees: string[];
 }
 
 export const WorkshopMenuContainer: React.FunctionComponent<WorkshopMenuContainerProps> =
-  ({ title, awsAccountId, attendees, workshopId }) => {
+  ({ description, title, awsAccountId, attendees, workshopId }) => {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const { role } = useContext(UserContext);
 
@@ -36,6 +37,7 @@ export const WorkshopMenuContainer: React.FunctionComponent<WorkshopMenuContaine
             onClose={() => setIsModalOpen(false)}
             workshopId={workshopId}
             title={title}
+            description={description}
             awsAccountId={awsAccountId}
             attendees={attendees}
           />

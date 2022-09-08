@@ -22,11 +22,13 @@ export const WorkshopListContainer: React.FunctionComponent = () => {
         <WorkshopCard
           key={workshop.id}
           title={workshop.title}
+          description={workshop.description}
           awsAccountId={workshop.awsAccountId}
           headerRightSide={
             <WorkshopMenuContainer
               workshopId={workshop.id}
               title={workshop.title}
+              description={workshop.description}
               awsAccountId={workshop.awsAccountId}
               attendees={workshop.attendees}
             />

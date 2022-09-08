@@ -6,12 +6,15 @@ import {
   CardActions,
   Typography,
   Skeleton,
+  CardHeader,
 } from "@mui/material";
+import MuiMarkdown from "mui-markdown";
 import * as translations from "./WorkshopCard.translations";
 
 export interface WorkshopCardDataProps {
   variant?: "data";
   title: string;
+  description?: string;
   awsAccountId?: string;
   headerRightSide?: React.ReactElement;
 }
@@ -52,19 +55,23 @@ export const WorkshopCard: React.FunctionComponent<WorkshopCardProps> = (
 
   return (
     <Card sx={{ mb: 4 }}>
-      <CardContent
-        sx={{
-          display: "flex",
-          justifyContent: "space-between",
-          alignItems: "center",
-          minHeight: 72,
-        }}
-      >
-        <Typography variant="h5" component="span">
-          {props.title}
-        </Typography>
-        {props.headerRightSide}
-      </CardContent>
+      <CardHeader title={props.title} action={props.headerRightSide} />
+      {props.description && (
+        <CardContent>
+          <MuiMarkdown
+            overrides={{
+              a: {
+                props: {
+                  target: "_blank",
+                  rel: "noreferrer noopener",
+                },
+              },
+            }}
+          >
+            {props.description}
+          </MuiMarkdown>
+        </CardContent>
+      )}
       <CardActions>
         {props.awsAccountId && (
           <Button

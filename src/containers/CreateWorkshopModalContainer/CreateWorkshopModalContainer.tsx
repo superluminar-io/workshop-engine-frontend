@@ -34,6 +34,7 @@ export const CreateWorkshopModalContainer: React.FunctionComponent<CreateWorksho
         variables: {
           input: {
             title: data.title,
+            description: data.description,
             awsAccountId: data.awsAccountId,
             attendees: attendees.split(","),
           },
