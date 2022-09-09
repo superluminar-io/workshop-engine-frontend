@@ -1,0 +1,5 @@
+mutation DeleteWorkshop($workshopId: ID!) {
+  deleteWorkshop(workshopId: $workshopId) {
+    ok
+  }
+}
