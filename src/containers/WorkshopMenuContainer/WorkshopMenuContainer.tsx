@@ -5,6 +5,7 @@ import { UserRole } from "../../types";
 import { UpdateWorkshopModalContainer } from "../UpdateWorkshopModalContainer/UpdateWorkshopModalContainer";
 import { MenuItem } from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
+import DeleteIcon from "@mui/icons-material/Delete";
 import * as translations from "./WorkshopMenuContainer.translations";
 
 export interface WorkshopMenuContainerProps {
@@ -17,7 +18,8 @@ export interface WorkshopMenuContainerProps {
 
 export const WorkshopMenuContainer: React.FunctionComponent<WorkshopMenuContainerProps> =
   ({ description, title, awsAccountId, attendees, workshopId }) => {
-    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [isUpdateModalOpen, setIsUpdateModalOpen] = useState(false);
+    const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
     const { role } = useContext(UserContext);
 
     if (role !== UserRole.Admin) {
@@ -27,14 +29,18 @@ export const WorkshopMenuContainer: React.FunctionComponent<WorkshopMenuContaine
     return (
       <>
         <WorkshopMenu id={workshopId}>
-          <MenuItem onClick={() => setIsModalOpen(true)}>
+          <MenuItem onClick={() => setIsUpdateModalOpen(true)}>
             <EditIcon />
             {translations.menuItemEdit}
           </MenuItem>
+          <MenuItem onClick={() => setIsDeleteModalOpen(true)}>
+            <DeleteIcon />
+            {translations.menuItemDelete}
+          </MenuItem>
         </WorkshopMenu>
-        {isModalOpen && (
+        {isUpdateModalOpen && (
           <UpdateWorkshopModalContainer
-            onClose={() => setIsModalOpen(false)}
+            onClose={() => setIsUpdateModalOpen(false)}
             workshopId={workshopId}
             title={title}
             description={description}
