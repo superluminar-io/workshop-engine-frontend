@@ -6,6 +6,7 @@ import { UpdateWorkshopModalContainer } from "../UpdateWorkshopModalContainer/Up
 import { MenuItem } from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
+import { DeleteWorkshopModalContainer } from "../DeleteWorkshopModalContainer/DeleteWorkshopModalContainer";
 import * as translations from "./WorkshopMenuContainer.translations";
 
 export interface WorkshopMenuContainerProps {
@@ -46,6 +47,12 @@ export const WorkshopMenuContainer: React.FunctionComponent<WorkshopMenuContaine
             description={description}
             awsAccountId={awsAccountId}
             attendees={attendees}
+          />
+        )}
+        {isDeleteModalOpen && (
+          <DeleteWorkshopModalContainer
+            onClose={() => setIsDeleteModalOpen(false)}
+            workshopId={workshopId}
           />
         )}
       </>

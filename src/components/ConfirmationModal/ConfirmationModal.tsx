@@ -37,7 +37,7 @@ export const ConfirmationModal: React.FunctionComponent<ConfirmationModalProps> 
         open={open}
         onClose={loading ? undefined : onCancel}
         fullWidth
-        maxWidth="sm"
+        maxWidth="xs"
         fullScreen={fullScreen}
       >
         <DialogTitle>{title}</DialogTitle>
